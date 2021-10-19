@@ -3,24 +3,24 @@
 
 int main() {
 
-	int number = 0;
+	int num = 0;
 	int remainder, binaryArray[10], i=0;
 
 	// "clear" command is for linux. Use "cls" for windows
 	system("clear");
 	printf("Enter the number to convert: ");
-	scanf("%d", &number);
+	scanf("%d", &num);
 
-	while( number ) {
+	while( num ) {
 
 		// Divide the number with 2 and store the remainder
-		remainder = number % 2;
+		remainder = num % 2;
 
 		/**
 		 * Store the new valued of the number after dividing it by 2.
 		 * This is so that it can be reused.
 		 */
-		number = number / 2;
+		num = num / 2;
 
 		// Add the remainder to the array.
 		binaryArray[i] = remainder;
