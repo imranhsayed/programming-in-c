@@ -18,16 +18,18 @@ int i, pos=-1;
 void insertResult();
 void display();
 
-void displayUserInputMenu( int userChoice ) {
+int displayUserInputMenu( int userChoice ) {
 	printf( "\n Press 1 to 'Insert Result'" );
 	printf( "\n Press 2 to 'Display Result'" );
 	printf( "\n Press 3 to 'Exit'" );
 
 	printf( "\n Enter your choice: " );
 	scanf( "%d", &userChoice );
+
+	return userChoice;
 }
 
-void handleUserChoice( int userChoice ) {
+int handleUserChoice( int userChoice ) {
 	switch( userChoice ) {
         case 1:
         insertResult();
@@ -43,13 +45,15 @@ void handleUserChoice( int userChoice ) {
         default:
         printf( "Incorrect choice entered. Please try again" );
     }
+
+    return userChoice;
 }
 
 void main() {
 	int userChoice;
 
 	while( 1 ) {
-		displayUserInputMenu( userChoice );
+		userChoice = displayUserInputMenu( userChoice );
 		handleUserChoice( userChoice );
 	}
 }
@@ -65,6 +69,10 @@ void insertResult() {
 	printf( "\n Enter student's roll no: " );
 	scanf( "%d", &student[pos].roll );
 
+	// . here is called 'Structure Member Operator'.
+	printf( "\n Enter student's name: " );
+//	scanf( "%s", &student[pos].name );
+
 	/**
 	* Cleans the input buffer
 	* ( if enter was pressed, which is considered as a character )
@@ -72,43 +80,34 @@ void insertResult() {
 	*/
 	fflush( stdin );
 
-	// . here is called 'Structure Member Operator'.
-	printf( "\n Enter student's name: " );
-	scanf( "%s", student[pos].name );
+	// Reads a line from a specified stream and stores it into the string pointed to by str. https://www.tutorialspoint.com/c_standard_library/c_function_fgets.htm
+	gets(student[pos].name);
 
-	for( i = 0; i < 4; i++ ) {
+	// @TODO Condition to be changed to i < 4.
+	for( i = 0; i < 1; i++ ) {
 		termCount = i + 1;
 		printf( "\n Enter marks for term %d", termCount );
 
 		printf( "\n English: " );
 		scanf( "%d", &student[pos].result[i][0] );
 
-		printf( "\n Computer Science: " );
+		printf( "\n Computer: " );
         scanf( "%d", &student[pos].result[i][1] );
 
 		printf( "\n Mathematics: " );
 		scanf( "%d", &student[pos].result[i][2] );
 
-		printf( "\n Physics: " );
+		printf( "\n Science: " );
 		scanf( "%d", &student[pos].result[i][3] );
 
-		printf( "\n Chemistry: " );
-		scanf( "%d", &student[pos].result[i][4] );
-
-		printf( "\n Biology: " );
-		scanf( "%d", &student[pos].result[i][5] );
-
-		printf( "\n History: " );
-        scanf( "%d", &student[pos].result[i][6] );
-
 		printf( "\n Geography: " );
-        scanf( "%d", &student[pos].result[i][7] );
+		scanf( "%d", &student[pos].result[i][4] );
 
 	}
 }
 
 void display() {
-	int givenRollNo, isRollNoFound = 0;
+	int givenRollNo, isRollNoFound = 0, j;
 
 	// Ask user to input the students roll no. in question.
 	printf( "\n Enter student's roll no: " );
@@ -118,13 +117,45 @@ void display() {
 	* Loop through all the students and when the roll number matches the givenRollNo,
 	* print the result in tabular alignment.
 	*/
-	for( i = 0; i < pos; i++ ) {
-		if( givenRollNo == student[i].roll ) {
+	for( i = 0; i <= pos; i++ ) {
+		printf( "\n\n Searching..." );
+		if( student[i].roll == givenRollNo ) {
+			printf( "\n\n %s Found", student[i].name );
 			isRollNoFound = 1;
 
 			printf( "\n\n %s", student[i].name );
 			printf( "\n\n Subject \t Term-1 \t Term-2 \t Term-4" );
-			printf( "\n\n English" );
+
+			printf( "\n English" );
+			for ( j = 0; j < 4; j++ ) {
+                printf( "\t %d", student[i].result[j][0] );
+            }
+
+			printf( "\n Computer" );
+            for ( j = 0; j < 4; j++ ) {
+                printf( "\t %d", student[i].result[j][1] );
+            }
+
+			printf( "\n Mathematics" );
+            for ( j = 0; j < 4; j++ ) {
+                printf( "\t %d", student[i].result[j][2] );
+            }
+
+			printf( "\n Science" );
+            for ( j = 0; j < 4; j++ ) {
+                printf( "\t %d", student[i].result[j][3] );
+            }
+
+			printf( "\n Geography" );
+            for ( j = 0; j < 4; j++ ) {
+                printf( "\t %d", student[i].result[j][4] );
+            }
+
+			break;
 		}
+	}
+
+	if( 0 == isRollNoFound ) {
+		printf( "\n\n Student not found" );
 	}
 }
