@@ -1,8 +1,6 @@
 #include <stdio.h> // Standard Input Output.
 #include <stdlib.h> // Standard Library.
 
-// @TODO Change variable 'pos' name to id.
-
 // Create a struct called 'Student'.
 struct Student {
 	int roll;
@@ -12,18 +10,19 @@ struct Student {
 
 // Create a variable called student with struct Student.
 struct Student student[20];
-int i, pos=-1;
+int i, position=-1;
 
 // Insert result and display.
 void insertResult();
 void display();
 
 int displayUserInputMenu( int userChoice ) {
+
 	printf( "\n Press 1 to 'Insert Result'" );
 	printf( "\n Press 2 to 'Display Result'" );
 	printf( "\n Press 3 to 'Exit'" );
 
-	printf( "\n Enter your choice: " );
+	printf( "\n\n Enter your choice: " );
 	scanf( "%d", &userChoice );
 
 	return userChoice;
@@ -49,13 +48,15 @@ int handleUserChoice( int userChoice ) {
     return userChoice;
 }
 
-void main() {
+int main() {
 	int userChoice;
 
 	while( 1 ) {
 		userChoice = displayUserInputMenu( userChoice );
 		handleUserChoice( userChoice );
 	}
+
+	return 0;
 }
 
 void insertResult() {
@@ -63,46 +64,51 @@ void insertResult() {
 	// Term no.
 	int termCount;
 
-	// Increment global variable 'pos' by one.
-	pos++;
+	// Increment global variable 'position' by one.
+	position++;
 
 	printf( "\n Enter student's roll no: " );
-	scanf( "%d", &student[pos].roll );
+	scanf( "%d", &student[position].roll );
 
 	// . here is called 'Structure Member Operator'.
 	printf( "\n Enter student's name: " );
-//	scanf( "%s", &student[pos].name );
 
 	/**
 	* Cleans the input buffer
 	* ( if enter was pressed, which is considered as a character )
-	* Else Enter will be stored as a value for student's name scanf( "%d", student[pos].name ) line below.
+	* Else Enter will be stored as a value for student's name scanf( "%d", student[position].name ) line below.
 	*/
 	fflush( stdin );
 
-	// Reads a line from a specified stream and stores it into the string pointed to by str. https://www.tutorialspoint.com/c_standard_library/c_function_fgets.htm
-	gets(student[pos].name);
+	/**
+    * Reads a line from a specified stream and stores it into the string pointed to by str.
+    * First parameter is the variable you want to read.
+    * Second parameter is the no. of characters defined. In this case we had defined char name[40]. That's why 40.
+    *
+    * @see https://www.tutorialspoint.com/c_standard_library/c_function_fgets.htm
+    */
+	fgets( student[position].name, 40, stdin );
 
-	// @TODO Condition to be changed to i < 4.
-	for( i = 0; i < 2; i++ ) {
-	
+	// Here 4 is the number of terms.
+	for( i = 0; i < 4; i++ ) {
+
 		termCount = i + 1;
 		printf( "\n\n Enter Marks For TERM %d: ", termCount );
 
 		printf( "\n\n English: " );
-		scanf( "%d", &student[pos].result[i][0] );
+		scanf( "%d", &student[position].result[i][0] );
 
 		printf( "\n Computers: " );
-        scanf( "%d", &student[pos].result[i][1] );
+        scanf( "%d", &student[position].result[i][1] );
 
 		printf( "\n Mathematics: " );
-		scanf( "%d", &student[pos].result[i][2] );
+		scanf( "%d", &student[position].result[i][2] );
 
 		printf( "\n Science: " );
-		scanf( "%d", &student[pos].result[i][3] );
+		scanf( "%d", &student[position].result[i][3] );
 
 		printf( "\n Geography: " );
-		scanf( "%d", &student[pos].result[i][4] );
+		scanf( "%d", &student[position].result[i][4] );
 
 	}
 }
@@ -118,7 +124,7 @@ void display() {
 	* Loop through all the students and when the roll number matches the givenRollNo,
 	* print the result in tabular alignment.
 	*/
-	for( i = 0; i <= pos; i++ ) {
+	for( i = 0; i <= position; i++ ) {
 		if( student[i].roll == givenRollNo ) {
 			isRollNoFound = 1;
 			printf( "\n Student name: %s Progress Report for VIII Standard", student[i].name );
@@ -149,11 +155,12 @@ void display() {
             for ( j = 0; j < 4; j++ ) {
                 printf( "\t %d\t", student[i].result[j][4] );
             }
+
 			break;
 		}
 	}
 
 	if( 0 == isRollNoFound ) {
-		printf( "\n\n Student not found. Please try again" );
+		printf( "\n\n Student not found. Please try again \n" );
 	}
 }
