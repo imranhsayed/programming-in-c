@@ -18,16 +18,7 @@ int i, pos=-1;
 void insertResult();
 void display();
 
-void main() {
-	int userChoice;
-
-	while( 1 ) {
-		displayUserInputMenu( userChoice );
-		handleUserChoice( userChoice );
-	}
-}
-
-void displayUserInputMenu( userChoice ) {
+void displayUserInputMenu( int userChoice ) {
 	printf( "\n Press 1 to 'Insert Result'" );
 	printf( "\n Press 2 to 'Display Result'" );
 	printf( "\n Press 3 to 'Exit'" );
@@ -36,7 +27,7 @@ void displayUserInputMenu( userChoice ) {
 	scanf( "%d", &userChoice );
 }
 
-void handleUserChoice( userChoice ) {
+void handleUserChoice( int userChoice ) {
 	switch( userChoice ) {
         case 1:
         insertResult();
@@ -54,6 +45,15 @@ void handleUserChoice( userChoice ) {
     }
 }
 
+void main() {
+	int userChoice;
+
+	while( 1 ) {
+		displayUserInputMenu( userChoice );
+		handleUserChoice( userChoice );
+	}
+}
+
 void insertResult() {
 
 	// Term no.
@@ -63,7 +63,7 @@ void insertResult() {
 	pos++;
 
 	printf( "\n Enter student's roll no: " );
-	scanf( "%d", student[pos].roll );
+	scanf( "%d", &student[pos].roll );
 
 	/**
 	* Cleans the input buffer
@@ -74,7 +74,7 @@ void insertResult() {
 
 	// . here is called 'Structure Member Operator'.
 	printf( "\n Enter student's name: " );
-	scanf( "%d", student[pos].name );
+	scanf( "%s", student[pos].name );
 
 	for( i = 0; i < 4; i++ ) {
 		termCount = i + 1;
@@ -83,7 +83,7 @@ void insertResult() {
 		printf( "\n English: " );
 		scanf( "%d", &student[pos].result[i][0] );
 
-		printf( "\n Computer Science" );
+		printf( "\n Computer Science: " );
         scanf( "%d", &student[pos].result[i][1] );
 
 		printf( "\n Mathematics: " );
@@ -98,10 +98,10 @@ void insertResult() {
 		printf( "\n Biology: " );
 		scanf( "%d", &student[pos].result[i][5] );
 
-		printf( "\n History" );
+		printf( "\n History: " );
         scanf( "%d", &student[pos].result[i][6] );
 
-		printf( "\n Geography" );
+		printf( "\n Geography: " );
         scanf( "%d", &student[pos].result[i][7] );
 
 	}
