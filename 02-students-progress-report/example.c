@@ -84,14 +84,15 @@ void insertResult() {
 	gets(student[pos].name);
 
 	// @TODO Condition to be changed to i < 4.
-	for( i = 0; i < 1; i++ ) {
+	for( i = 0; i < 2; i++ ) {
+	
 		termCount = i + 1;
-		printf( "\n Enter marks for term %d", termCount );
+		printf( "\n\n Enter Marks For TERM %d: ", termCount );
 
-		printf( "\n English: " );
+		printf( "\n\n English: " );
 		scanf( "%d", &student[pos].result[i][0] );
 
-		printf( "\n Computer: " );
+		printf( "\n Computers: " );
         scanf( "%d", &student[pos].result[i][1] );
 
 		printf( "\n Mathematics: " );
@@ -118,44 +119,41 @@ void display() {
 	* print the result in tabular alignment.
 	*/
 	for( i = 0; i <= pos; i++ ) {
-		printf( "\n\n Searching..." );
 		if( student[i].roll == givenRollNo ) {
-			printf( "\n\n %s Found", student[i].name );
 			isRollNoFound = 1;
+			printf( "\n Student name: %s Progress Report for VIII Standard", student[i].name );
 
-			printf( "\n\n %s", student[i].name );
-			printf( "\n\n Subject \t Term-1 \t Term-2 \t Term-4" );
+			printf( "\n\n Subject \t Term-1 \t Term-2 \t Term-3 \t Term-4" );
 
 			printf( "\n English" );
 			for ( j = 0; j < 4; j++ ) {
-                printf( "\t %d", student[i].result[j][0] );
+                printf( "\t %d\t", student[i].result[j][0] );
             }
 
-			printf( "\n Computer" );
+			printf( "\n Computers" );
             for ( j = 0; j < 4; j++ ) {
-                printf( "\t %d", student[i].result[j][1] );
+                printf( "\t %d\t", student[i].result[j][1] );
             }
 
 			printf( "\n Mathematics" );
             for ( j = 0; j < 4; j++ ) {
-                printf( "\t %d", student[i].result[j][2] );
+                printf( "\t %d\t", student[i].result[j][2] );
             }
 
 			printf( "\n Science" );
             for ( j = 0; j < 4; j++ ) {
-                printf( "\t %d", student[i].result[j][3] );
+                printf( "\t %d\t", student[i].result[j][3] );
             }
 
 			printf( "\n Geography" );
             for ( j = 0; j < 4; j++ ) {
-                printf( "\t %d", student[i].result[j][4] );
+                printf( "\t %d\t", student[i].result[j][4] );
             }
-
 			break;
 		}
 	}
 
 	if( 0 == isRollNoFound ) {
-		printf( "\n\n Student not found" );
+		printf( "\n\n Student not found. Please try again" );
 	}
 }
