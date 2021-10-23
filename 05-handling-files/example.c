@@ -1,28 +1,36 @@
 #include<stdio.h>
 
 int main() {
-	FILE *even, *odd;
-	int n, array[100], i;
+	FILE *evenNumberFile, *oddNumberFile;
+	int countOfNumbers, givenNumbersArray[100], i;
 
+	// Step One: Take the count of Numbers.
 	printf( "\n Enter the count of numbers: " );
-	scanf( "%d", &n );
+	scanf( "%d", &countOfNumbers );
 
-	for( i = 0; i < n; i++ ) {
-		printf( "\n Enter number-%d: ", i + 1 );
-		scanf( "%d", &array[i] );
+	for( i = 0; i < countOfNumbers; i++ ) {
+		printf( "\n Enter number %d: ", i + 1 );
+		scanf( "%d", &givenNumbersArray[i] );
 	}
 
-	even = fopen( "evenfile", "w" );
-	odd = fopen( "oddfile", "w" );
+	// Step Two: Open Two Writable Files called "even-numbers" and "odd-numbers"
+	evenNumberFile = fopen( "even-numbers", "w" );
+	oddNumberFile = fopen( "odd-numbers", "w" );
 
-	for( i = 0; i < n; i++ ) {
-		if( array[i]%2 == 0 ) {
-			putw( array[i], even );
+	// Step Three: Loop through the user fed numbers and put them conditionally into respective even and odd files.
+	for( i = 0; i < countOfNumbers; i++ ) {
+
+		if( givenNumbersArray[i]%2 == 0 ) {
+			putw( givenNumbersArray[i], evenNumberFile );
 		} else {
-			putw( array[i], odd );
+			putw( givenNumbersArray[i], oddNumberFile );
 		}
+
 	}
 
-	fclose( even );
-	fclose( odd );
+	// Step Four: Close the Files.
+	fclose( evenNumberFile );
+	fclose( oddNumberFile );
+
+	return 0;
 }
