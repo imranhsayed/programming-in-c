@@ -10,14 +10,14 @@ Programming in C
 
 ### Arrays
 
-#### One dimensional array
+#### One dimensional array ( Vectors )
 * Syntax:
 `int arrayVariableName[size];`
 
 * Example one - `int myNums[4];` // Here 4 is the size of the array, means this array can have upto four items.
 * Example two `int myNums[] = {1, 4, 6, 8}` // Because we are declaring and initiallzing the array at the same time, we don't need to specify the size 4.
 
-#### Two Dimensional array.
+#### Two Dimensional array ( Matrices )
 * Syntax:
 `int arrayVariableName[rowsCount][columnsCount];`
 

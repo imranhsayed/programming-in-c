@@ -1,4 +1,8 @@
 ## Problem: 
-*Write an algorithm and its corresponding C program to generate students’ Progress-Report
-for VIII standard (section of 20 students) of a CBSE school for all its 4 terms. Use Structures concept.
-Assumptions can be made wherever necessary.*
+*Write a C program to generate the following pattern:*
+
+* 1
+* 1 2
+* 1 2 3
+* 1 2 3 4
+* 1 2 3 4 5
