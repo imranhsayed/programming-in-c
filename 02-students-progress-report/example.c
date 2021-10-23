@@ -5,7 +5,7 @@
 struct Student {
 	int roll;
 	char name[40];
-	int result[4][8];
+	int result[4][5];
 };
 
 // Create a variable called student with struct Student.
