@@ -38,7 +38,7 @@ void multiplyMatrices( int matrixOne[3][3], int matrixTwo[3][3] ) {
 void addMatrices( int matrixOne[3][3], int matrixTwo[3][3] ) {
     for( i = 0; i < 3; i++ ) {
         for( j = 0; j < 3; j++ ) {
-			matrixOne[i][j] = matrixOne[i][j] + matrixTwo[i][i];
+			matrixOne[i][j] = matrixOne[i][j] + matrixTwo[i][j];
         }
     }
 }
