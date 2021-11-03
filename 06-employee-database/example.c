@@ -46,6 +46,30 @@ void createANewRecord() {
 }
 
 void listRecords() {
+	for( i = 0; i < totalEmployees; i++ ) {
+		printf( "\n Employee Name: %s", employees[i].name );
+		printf( "\n Employee ID: %d", employees[i].id );
+		printf( "\n Employee Department: %s", employees[i].department );
+		printf( "\n Employee Salary: %d", employees[i].salary );
+		printf( "\n Employee Position: %s", employees[i].position );
+		printf( "\n Employee Date of Joining: %s", employees[i].dateOfJoining );
+	}
+}
+
+void modifyARecord() {
+}
+
+void deleteARecord() {
+	int indexOfEmployeeToBeDeleted = -1;
+
+	printf( "\n Enter Employee ID to delete the record: " );
+	scanf( "%d", &employee.id );
+
+	for( i = 0; i < totalEmployees; i++ ) {
+		if( employee.id == employees[i].id ) {
+			indexOfEmployeeToBeDeleted = i;
+		}
+	}
 
 }
 
@@ -55,14 +79,21 @@ int handleChoices( int choice ) {
 		createANewRecord();
 	} else if ( choice == 2 ) {
 		listRecords();
-	}
+	} else if ( choice == 3 ) {
+        modifyARecord();
+    } else if ( choice == 4 ) {
+        deleteARecord();
+    } else if ( choice == 5 ) {
+        return 0; // Exit.
+    } else {
+        printf( "\n Incorrect choice. Choices should be between 1 to 5" )
+    }
 
 	return 0;
 }
 
 int main() {
 	int i;
-	int indexSelectedEmployee;
 	int userChoice = 0;
 
 	while( userChoice != 5 ) {
