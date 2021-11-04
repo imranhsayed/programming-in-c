@@ -48,11 +48,12 @@ void createANewRecord() {
 void listRecords() {
 	for( i = 0; i < totalEmployees; i++ ) {
 		printf( "\n Employee Name: %s", employees[i].name );
-		printf( "\n Employee ID: %d", employees[i].id );
-		printf( "\n Employee Department: %s", employees[i].departmentName );
-		printf( "\n Employee Salary: %f", employees[i].salary );
-		printf( "\n Employee Position: %s", employees[i].position );
-		printf( "\n Employee Date of Joining: %s", employees[i].dateOfJoining );
+		printf( "Employee ID: %d", employees[i].id );
+		printf( "Employee Department: %s", employees[i].departmentName );
+		printf( "Employee Salary: %f", employees[i].salary );
+		printf( "Employee Position: %s", employees[i].position );
+		printf( "Employee Date of Joining: %s", employees[i].dateOfJoining );
+		printf( "\n\n" );
 	}
 }
 
@@ -93,7 +94,7 @@ void modifyARecord() {
 		    printf( "\n Enter a new employee's date of joining: " );
 		    fgets( employees[employeeIndex].dateOfJoining, 50, stdin );
         } else {
-            printf( "Employee ID does not exist");
+            printf( "Employee ID does not exist\n\n");
         }
 }
 
@@ -153,7 +154,7 @@ int main() {
 		printf( "2. Reading/Listing of Records\n" );
 		printf( "3. Modify a Record\n" );
 		printf( "4. Delete a Record\n" );
-		printf( "5. Exit\n" );
+		printf( "5. Exit\n\n" );
 
 		printf( "Please enter a choice: " );
 		scanf( "%d", &userChoice );
