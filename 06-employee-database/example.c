@@ -57,20 +57,72 @@ void listRecords() {
 }
 
 void modifyARecord() {
+	int employeeIndex = -1;
+
+		printf( "\n Enter Employee ID to modify the record: " );
+    	scanf( "%d", &employee.id );
+
+		// Loop through all the records and when an id match is found set that to the variable employeeIndex.
+        for( i = 0; i < totalEmployees; i++ ) {
+            if( employee.id == employees[i].id ) {
+                employeeIndex = i;
+            }
+        }
+
+        // If match is found take the data to be updated and update it.
+        if( employeeIndex != -1 ) {
+			fflush( stdin );
+
+			printf( "\n Enter a new name of the employee: " );
+			fgets( employees[employeeIndex].name, 50, stdin );
+
+			printf( "\n Enter a new employee ID: " );
+		    scanf( "%d", &employees[employeeIndex].id );
+
+			fflush( stdin );
+		    printf( "\n Enter a new department name: " );
+		    fgets( employees[employeeIndex].departmentName, 50, stdin );
+
+		    printf( "\n Enter a new employee's salary: " );
+		    scanf( "%f", &employees[employeeIndex].salary );
+
+		    fflush( stdin );
+		    printf( "\n Enter a new employee's position: " );
+		    fgets( employees[employeeIndex].position, 50, stdin );
+
+		    printf( "\n Enter a new employee's date of joining: " );
+		    fgets( employees[employeeIndex].dateOfJoining, 50, stdin );
+        } else {
+            printf( "Employee ID does not exist");
+        }
 }
 
 void deleteARecord() {
-	int indexOfEmployeeToBeDeleted = -1;
+	int employeeIndex = -1;
 
 	printf( "\n Enter Employee ID to delete the record: " );
 	scanf( "%d", &employee.id );
 
+	// Loop through all the records and when an id match is found set that to the variable employeeIndex.
 	for( i = 0; i < totalEmployees; i++ ) {
 		if( employee.id == employees[i].id ) {
-			indexOfEmployeeToBeDeleted = i;
+			employeeIndex = i;
 		}
 	}
 
+	// If match is found, we need to shift array elements which are after the element to be deleted. @see https://www.programmingsimplified.com/c/source-code/c-program-delete-element-from-array
+	if( employeeIndex != -1 ) {
+		// Start from the index of the employee( i = employeeIndex ) to be deleted and shift each element one index behind.
+		for( i = employeeIndex; i < totalEmployees - 1; i++ ) {
+			employees[i] = employees[i+1];
+		}
+
+		// Reduce the count of global variable totalEmployees by one, since one item is remove from the array.
+		totalEmployees--;
+		printf( "Employee has been deleted" );
+	} else {
+		printf( "Employee ID not found" );
+	}
 }
 
 int handleChoices( int choice ) {
@@ -86,7 +138,7 @@ int handleChoices( int choice ) {
     } else if ( choice == 5 ) {
         return 0; // Exit.
     } else {
-        printf( "\n Incorrect choice. Choices should be between 1 to 5" )
+        printf( "\n Incorrect choice. Choices should be between 1 to 5" );
     }
 
 	return 0;
