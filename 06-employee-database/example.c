@@ -12,7 +12,7 @@ struct Employee {
 
 struct Employee employees[100];
 struct Employee employee;
-int totalEmployees = 0;
+int totalEmployees = 0, i;
 
 void createANewRecord() {
 
@@ -49,8 +49,8 @@ void listRecords() {
 	for( i = 0; i < totalEmployees; i++ ) {
 		printf( "\n Employee Name: %s", employees[i].name );
 		printf( "\n Employee ID: %d", employees[i].id );
-		printf( "\n Employee Department: %s", employees[i].department );
-		printf( "\n Employee Salary: %d", employees[i].salary );
+		printf( "\n Employee Department: %s", employees[i].departmentName );
+		printf( "\n Employee Salary: %f", employees[i].salary );
 		printf( "\n Employee Position: %s", employees[i].position );
 		printf( "\n Employee Date of Joining: %s", employees[i].dateOfJoining );
 	}
