@@ -47,10 +47,10 @@ void createANewRecord() {
 
 void listRecords() {
 	for( i = 0; i < totalEmployees; i++ ) {
-		printf( "\n Employee Name: %s", employees[i].name );
+		printf( "Employee Name: %s", employees[i].name );
 		printf( "Employee ID: %d", employees[i].id );
 		printf( "Employee Department: %s", employees[i].departmentName );
-		printf( "Employee Salary: %f", employees[i].salary );
+		printf( "Employee Salary: %f \n", employees[i].salary );
 		printf( "Employee Position: %s", employees[i].position );
 		printf( "Employee Date of Joining: %s", employees[i].dateOfJoining );
 		printf( "\n\n" );
@@ -120,7 +120,7 @@ void deleteARecord() {
 
 		// Reduce the count of global variable totalEmployees by one, since one item is remove from the array.
 		totalEmployees--;
-		printf( "Employee has been deleted" );
+		printf( "Employee has been deleted \n" );
 	} else {
 		printf( "Employee ID not found" );
 	}

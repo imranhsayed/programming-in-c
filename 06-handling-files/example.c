@@ -50,6 +50,8 @@ int main() {
 		printf(",");
 	}
 
+	printf("\n");
+
 	fclose( evenNumberFile );
     fclose( oddNumberFile );
 
