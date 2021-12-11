@@ -38,7 +38,7 @@ int main() {
 
     printf("even-numbers.txt file content: ");
 
-	while( ( num = getw(evenNumberFile) ) !=EOF ) {
+	while( ( num = getw(evenNumberFile) ) != EOF ) {
 		printf("%4d",num);
 		printf(",");
 	}
