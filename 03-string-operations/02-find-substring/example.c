@@ -8,8 +8,12 @@ int getSubstringIndex( char targetString[], char subString[] ) {
 
     lengthOfSubString = strlen( subString );
 
+    printf("\n Length of Substring :  %d", lengthOfSubString);
+
 	// 1. Loop through the Target String characters array.
-    for( index = 0; targetString[ index + lengthOfSubString - 1 ]; index++ ) {
+    for( index = 0; index < strlen( targetString ) - 1 ; index++ ) {
+
+       printf("\n The String is :  %c", targetString[index]);
 
         // Temporary hold the value of Target String index in temporary Index ( tempIndex ) .
         tempIndex = index;
@@ -22,12 +26,27 @@ int getSubstringIndex( char targetString[], char subString[] ) {
                 break;
             }
 
-            // Else, it means a character match is found, and we increment the index to try to match the rest of the target string.
+            // It means a character match is found, and we increment the index to try to match the rest of the target string.
             tempIndex++;
+
         }
+
+        // If target substring only has one character.
+        if( lengthOfSubString - 1 == 1 ) {
+            ++substringIndex;
+        }
+
+                printf("\n substringIndex:  %d", substringIndex);
+                printf("\n lengthOfSubString:  %d", lengthOfSubString);
+                printf("\n CurrentIndex:  %d", index);
 
 		// This means the above Loop 2, have successfully run, without break and all characters of substring is matched.
         if( substringIndex == lengthOfSubString  ) {
+
+                printf("\n Match found :  %d", lengthOfSubString);
+                printf("\n The substringIndex is :  %d", substringIndex);
+                printf("\n The lengthOfSubString is :  %d", lengthOfSubString);
+
             // At this point this is the starting index of the targetString where the first character of a fully matched strings was found. Hence we return this index.
             return index;
         }
@@ -51,7 +70,7 @@ int main() {
     fgets( subString, sizeof(subString), stdin );
 
     pos = getSubstringIndex( targetString, subString );
-    printf("Position of substring %d", pos);
+    printf("\n Position of substring %d", pos);
 
     return 0;
 }
