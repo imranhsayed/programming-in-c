@@ -1,4 +1,11 @@
-// Online C compiler to run C program online
+/*
+*Write a program in ‘C’ language, which accepts Enrolment number, Name
+    Aggregate marks secured in a Program by a student. Assign ranks to students
+    according to the marks secured. Rank-1 should be awarded to the students who
+    secured the highest marks and so on. The program should print the enrolment
+    number, name of the student and the rank secured in ascending order.
+*/
+
 #include <stdio.h>
 
 int main() {
