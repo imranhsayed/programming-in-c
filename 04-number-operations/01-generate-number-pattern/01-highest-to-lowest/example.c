@@ -1,21 +1,30 @@
-#include <stdio.h>
+#include<stdio.h>
+#include<stdlib.h>
 
 int main() {
+	int i, j, noOfRows;
 
-    int noOfRows = 5, counter = 5;
+	// You should enter 5 to generate the 5 rows, as asked in the question.
+	printf( "\n Enter the number of rows: " );
+	scanf( "%d", &noOfRows );
 
-    // Print 5 rows ( no of rows), starting from 5th row and decrementing;
-    for( int i = noOfRows; i > 0; i-- ) {
+	// Loop through the
+	for( i = noOfRows; i > 0; i-- ) {
 
-        // Start from 5th number, and print consecutive decremented value until the counter.
-        for( int j = noOfRows; j >= counter; j-- ) {
-            printf( "%d\t", j );
+		/*
+		* Loop through till the length of i
+		* First time value of i wil be 5, so it will print 5.
+		* Second time value of i will be 4, so it will run below loop
+		* twice and since value of j will be 5 in first iteration and 4 in second
+		* iteration , it will print 5 4.
+		* This process will continue until the count of rows.
+		*/
+		for( j = noOfRows; j >= i;j-- ) {
+			printf( "%d ", j );
         }
-        printf( "\n");
 
-        // To reverse the pattern, change initial counter value to 0 and counter++;
-        counter--;
-    }
+        printf( "\n" );
+	}
 
-    return 0;
+	return 0;
 }
