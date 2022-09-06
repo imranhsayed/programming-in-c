@@ -8,29 +8,30 @@
 
 #include <stdio.h>
 
+struct Student {
+    int enrollmentNo;
+    char name[100];
+    float marks;
+};
+
 int main() {
 
-    struct Student {
-        int enrollmentNo;
-        char name[100];
-        float marks;
-    };
-
     int noOfStudent;
-    struct Student student[noOfStudent], temp;
 
     // Get the no. of students.
     printf("Enter the number of students: ");
     scanf("%d", &noOfStudent);
 
+    struct Student student[noOfStudent], temp;
+
     // Get the student details.
-    printf( "\n Enter student details: " );
+    printf( "\n Enter student details: \n" );
 
     for( int i = 0; i < noOfStudent; i++ ) {
         student[i].enrollmentNo = i+1;
 
         printf("\n Enter student name:");
-        scanf("%s", &student[i].name);
+        scanf("%s", student[i].name);
 
         printf("\n Enter student's marks: ");
         scanf("%f", &student[i].marks);
@@ -39,7 +40,7 @@ int main() {
     // Sort the array: Bubble sort- kritika's special.
     for ( int i = 1; i < noOfStudent; i++ ) {
         for( int j = 0; j < noOfStudent - i; j++ ) {
-            if( student[j].marks > student[j+1].marks ) {
+            if( student[j].marks < student[j+1].marks ) {
                 temp = student[j];
                 student[j] = student[j + 1];
                 student[j + 1] = temp;
@@ -52,7 +53,7 @@ int main() {
         printf("\n Rank: %d", i+1 );
         printf("\n Enroll No: %d", student[i].enrollmentNo );
         printf("\n Name: %s", student[i].name );
-        printf("\n Marks: %f", student[i].marks);
+        printf("\n Marks: %.2f\n", student[i].marks);
     }
 
     return 0;
