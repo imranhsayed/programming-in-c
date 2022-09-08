@@ -18,12 +18,13 @@ struct Node *firstNode;
 
 // Function to create the list
 void createNodeList( int noOfNodes );
+void deleteANodeFromTheList( int node );
 // Function to display the list
 void displayList();
 
 int main() {
     
-    int noOfNodes;
+    int noOfNodes, dataToDelete;
 
     printf( "Enter the no of nodes for the singly linked list: " );
     scanf( "%d", &noOfNodes );
@@ -31,7 +32,17 @@ int main() {
     // Create Node list.
     createNodeList( noOfNodes );
     
+    // Display the created node list.
     printf("\n Data entered in the list : \n");
+    displayList();
+
+    printf( "Enter node value to be deleted from the list: " );
+    scanf( "%d", &dataToDelete );
+
+    // Delete an element from the linked list.
+    deleteANodeFromTheList( dataToDelete );
+
+    // Display again
     displayList();
 
     return 0;
@@ -90,20 +101,63 @@ void createNodeList( int noOfNodes ) {
     }
 }
 
+// Display the single linked list data.
 void displayList() {
     struct Node *temp;
     
     if (firstNode == NULL) {
         printf(" List is empty.");
-    } else {
-        temp = firstNode;
-        while (temp != NULL) {
-            printf( "Data = %d\n", temp->data );
+        return;
+    }
+
+    // First set the temp to first node.
+    temp = firstNode;
+
+    // Loop through till the end of the single linked list( i.e untill the node(temp) is not null )
+    while (temp != NULL) {
+        printf( "Data = %d\n", temp->data );
+
+        // Set the temp to point to the next node.
+        temp = temp->nextPtr;
+    }
+}
+
+void deleteANodeFromTheList( int dataToDelete ) {
+    struct Node *previousNode;
+    struct Node *temp;
+
+    if (firstNode == NULL) {
+        printf(" List is empty.");
+        return;
+    }
+
+    // First set the temp to first node.
+    previousNode = firstNode;
+    temp = firstNode;
+
+    // Loop through till the end of the single linked list( i.e untill the node(temp) is not null )
+    while (temp != NULL) {
+
+        printf( "Current Node data = %d\n", temp->data );
+        printf( "Next Node data = %d\n", temp->nextPtr->data );
+
+        if( dataToDelete == temp->nextPtr->data ) {
+
+            // previousNode->nextPtr = temp->nextPtr;
+            // free(temp);
+            temp->nextPtr = temp->nextPtr->nextPtr;
+            break;
+        } else {
             temp = temp->nextPtr;
         }
-        
+
+        // Set the temp to point to the next node.
+        // previousNode = temp;
+        // temp = temp->nextPtr;
+
+        // printf( "Previous Node data = %d\n", previousNode->data );
+        // printf( "Current Node data = %d\n", temp->data );
     }
-    
 }
 
 
