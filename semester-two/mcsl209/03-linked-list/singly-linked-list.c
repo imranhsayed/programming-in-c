@@ -132,31 +132,26 @@ void deleteANodeFromTheList( int dataToDelete ) {
     }
 
     // First set the temp to first node.
-    previousNode = firstNode;
     temp = firstNode;
 
     // Loop through till the end of the single linked list( i.e untill the node(temp) is not null )
-    while (temp != NULL) {
+    for (int i = 0; temp != NULL; i++ ) {
 
-        printf( "Current Node data = %d\n", temp->data );
-        printf( "Next Node data = %d\n", temp->nextPtr->data );
+        if ( i == 0 && dataToDelete == temp->data ) {
+            firstNode = firstNode->nextPtr;
+            break;
+        }
+        
+
+        // printf( "Current Node data = %d\n", temp->data );
+        // printf( "Next Node data = %d\n", temp->nextPtr->data );
 
         if( dataToDelete == temp->nextPtr->data ) {
-
-            // previousNode->nextPtr = temp->nextPtr;
-            // free(temp);
             temp->nextPtr = temp->nextPtr->nextPtr;
             break;
         } else {
             temp = temp->nextPtr;
         }
-
-        // Set the temp to point to the next node.
-        // previousNode = temp;
-        // temp = temp->nextPtr;
-
-        // printf( "Previous Node data = %d\n", previousNode->data );
-        // printf( "Current Node data = %d\n", temp->data );
     }
 }
 
