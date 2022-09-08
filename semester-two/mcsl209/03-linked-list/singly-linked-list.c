@@ -1,4 +1,5 @@
 // Linked List : To create and display Singly Linked List/
+// https://www.w3resource.com/c-programming-exercises/linked_list/c-linked_list-exercise-1.php
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -56,11 +57,18 @@ void createNodeList( int noOfNodes ) {
         
         firstNode->data = data;      
         firstNode->nextPtr = NULL; // links the address field to NULL
+
+        // Initial temp will contain first node and then later in below loop it will 
+        // contain previous node.
         temp = firstNode;
         
         // Creating noOfNodes nodes and adding to linked list
         for( int i=2; i<=noOfNodes; i++) {
+
+            // Allocate dynamic memory to new new node.
             newNode = (struct Node *)malloc(sizeof(struct Node));
+
+            // Ensure some memory is allocated.
             if(newNode == NULL) {
                 printf(" Memory can not be allocated.");
                 break;
@@ -69,13 +77,15 @@ void createNodeList( int noOfNodes ) {
             printf(" Input data for node %d : ", i);
             scanf(" %d", &data);
             
-            // links the data field of newNode with data
+            // Add the data to the node.
             newNode->data = data;
-            // links the address field of newNode with NULL
+            // Set the next Pointer to NULL first.
             newNode->nextPtr = NULL;
+            // Then set previous node's next pointer (tmp) to the newNode
+            temp->nextPtr = newNode; 
+            // Then point previous node(temp) to the next node.
+            temp = newNode;
             
-            temp->nextPtr = newNode; // links previous node i.e. tmp to the newNode
-            temp = temp->nextPtr; 
         }
     }
 }
