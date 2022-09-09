@@ -164,8 +164,8 @@ void deleteANodeFromTheList( int dataToDelete ) {
         **/
         if( dataToDelete == temp->nextPtr->data ) {
             temp->nextPtr = temp->nextPtr->nextPtr;
-            printf("Temp->next->next: %d", temp->nextPtr->nextPtr->data);
-            printf("Temp->next->next: %d", temp->nextPtr->nextPtr->prevPtr->data);
+            // printf("Temp->next->next: %s", temp->nextPtr->nextPtr);
+            printf("Temp->next->next: %s", temp->nextPtr->nextPtr->prevPtr);
             //temp->nextPtr->nextPtr->prevPtr = temp;
             break;
         } else {
