@@ -137,6 +137,10 @@ void deleteANodeFromTheList( int dataToDelete ) {
     // Loop through till the end of the single linked list( i.e untill the node(temp) is not null )
     for (int i = 0; temp != NULL; i++ ) {
 
+        /**
+         * Node exists at the begining
+         * If the node exists at the start, set the first node to the next node to delete the node in question.
+        **/
         if ( i == 0 && dataToDelete == temp->data ) {
             firstNode = firstNode->nextPtr;
             break;
@@ -146,12 +150,30 @@ void deleteANodeFromTheList( int dataToDelete ) {
         // printf( "Current Node data = %d\n", temp->data );
         // printf( "Next Node data = %d\n", temp->nextPtr->data );
 
+        /**
+         * Node exists in the middle
+         * If the node exists at the next index, if yes then set the current to to next to next node
+         * in order to delete the node in question.
+        **/
         if( dataToDelete == temp->nextPtr->data ) {
             temp->nextPtr = temp->nextPtr->nextPtr;
             break;
         } else {
+            // Else increment the temp to point to next node.
             temp = temp->nextPtr;
         }
+
+        /**
+         * Node exists at the end.
+         * Check if the next to next pointer is null, the data matches with the next node data,
+         * then set the current node next pointer to NULL,because we want to delete the last node.
+        **/
+        if ( temp->nextPtr->nextPtr == NULL && dataToDelete == temp->nextPtr->data ){
+        
+            temp->nextPtr = NULL;
+            break;
+        }
+        
     }
 }
 
