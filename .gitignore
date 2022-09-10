@@ -52,3 +52,5 @@ Mkfile.old
 dkms.conf
 
 .idea
+.vscode/c_cpp_properties.json
+.vscode/launch.json
