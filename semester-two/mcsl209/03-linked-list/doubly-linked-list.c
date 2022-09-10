@@ -1,4 +1,4 @@
-// Linked List : To create and display Singly Linked List/
+// Doubly Linked List : To create and display Doubly Linked List/
 // https://www.w3resource.com/c-programming-exercises/linked_list/c-linked_list-exercise-1.php
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,7 +6,8 @@
 /**
  * Create a stucture data type for Node, that will store 
  * 1. the data 
- * 2. the pointer, pointing to the next node ( containing address of the next node)
+ * 2. the next pointer, pointing to the next node ( containing address of the next node)
+ * 3. the prev pointer, pointing to the prev node ( containing address of the prev node)
 **/
 struct Node {
     int data; // Data for the node.
@@ -68,8 +69,8 @@ void createNodeList( int noOfNodes ) {
         scanf("%d", &data);
         
         firstNode->data = data;      
-        firstNode->nextPtr = NULL; // links the address field to NULL
-        firstNode->prevPtr = NULL;
+        firstNode->nextPtr = NULL; // links the address field of next Ptr to NULL
+        firstNode->prevPtr = NULL; // links the address field of prev Ptr to NULL
 
         // Initial temp will contain first node and then later in below loop it will 
         // contain previous node.
@@ -99,7 +100,7 @@ void createNodeList( int noOfNodes ) {
             // Then set previous node's next pointer (tmp) to the newNode
             temp->nextPtr = newNode; 
             /* Then point previous node(temp) to the next node. 
-             * The previous pointer of temp will be set to newNode's prevoius pointer with the below line
+             * The previous pointer of temp will be set to newNode's prevoius pointer with the line below
              */
             temp = newNode;
             
@@ -107,7 +108,7 @@ void createNodeList( int noOfNodes ) {
     }
 }
 
-// Display the single linked list data.
+// Display the doubly linked list data.
 void displayList() {
     struct Node *temp;
     
@@ -163,10 +164,8 @@ void deleteANodeFromTheList( int dataToDelete ) {
          * in order to delete the node in question.
         **/
         if( dataToDelete == temp->nextPtr->data ) {
+            temp->nextPtr->nextPtr->prevPtr = temp;
             temp->nextPtr = temp->nextPtr->nextPtr;
-            // printf("Temp->next->next: %s", temp->nextPtr->nextPtr);
-            printf("Temp->next->next: %s", temp->nextPtr->nextPtr->prevPtr);
-            //temp->nextPtr->nextPtr->prevPtr = temp;
             break;
         } else {
             // Else increment the temp to point to next node.
