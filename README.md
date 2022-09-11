@@ -40,3 +40,6 @@ for(i=0;i<4;i++){
 return 0;  
 }
 ```
+
+<img width="1434" alt="image" src="https://user-images.githubusercontent.com/11497423/189525386-7f5d95f3-b800-49d3-afa8-fdeda3374afb.png">
+
