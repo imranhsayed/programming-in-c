@@ -1,19 +1,52 @@
 #include <stdio.h>  
-#define SIZE 20  
+#define SIZE 10  
 
 
 int array[SIZE];  // declaration of array type variable.  
 int top1 = -1;  
-int top2 = SIZE;
-int lengthOfStack1 = 10, lengthOfStack2 = 10;
+int top2 = -1;
+int lengthOfStack1 = 5, lengthOfStack2 = 5;
 
 void push1(int item) {
-    if (top1 == lengthOfStack1-1) {
+    if (top1 == top2 - 1) {
         printf("Stack Overflow");
     } else {
         top1++;
         array[top1] = item;
     }
+}
+
+void push2(int item) {
+    if (top2 == top1 + 1) {
+        printf("Stack Overflow");
+    } else {
+        top2--;
+        array[top2] = item;
+    }
+}
+
+int pop1() {
+    int item;
+    if (top1 == -1)
+        printf("Stack is empty");
+    else {
+        item = array[top1];
+        top1--;
+        printf("Item removed: %d", item);
+    }
+    return item;
+}
+
+int pop2() {
+    int item;
+    if (top2 == -1)
+        printf("Stack is empty");
+    else {
+        item = array[top2];
+        top2++;
+        printf("Item removed: %d", item);
+    }
+    return item;
 }
 
 int main() {
