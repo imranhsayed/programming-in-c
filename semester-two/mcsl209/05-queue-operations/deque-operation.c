@@ -15,10 +15,10 @@ void insert_right() {
     }
 
     // If the queue is empty set both left and right to zero, because we are adding a new item.
-    if( left = -1 ) {
+    if( left == -1 ) {
         left = 0;
         right = 0;
-    } else if( right = MAX - 1 ) {
+    } else if( right == MAX - 1 ) {
         right = 0;
     } else {
         right = right + 1;
@@ -30,10 +30,32 @@ void insert_right() {
 
 }
 
-void insert_left();
-void delete_right();
-void delete_left();
-void display_queue();
+void insert_left(){
+    int item;
+
+    // If queue is full. 
+	if( ( left == 0 && right == MAX -1 ) || ( left == right + 1 ) ) {
+        printf("Queue Overflow \n");
+		return;
+    }
+
+    /*If queue is initially empty*/
+	if( left == -1 ) {
+        left = 0;
+		right = 0;
+    } else if( left == 0) {
+        left = MAX - 1;
+    } else {
+        left = left - 1;
+    }
+		
+	printf("Input the element for adding in queue : ");
+	scanf("%d", &item);
+	deque_arr[ left ] = item ;
+}
+
+void delete_right(){}
+void delete_left(){}
 
 void display_queue() {
     int front_position = left, rear_position = right;
@@ -44,13 +66,14 @@ void display_queue() {
         return;
     }
 
-    printf("Queue elements are:\n");
+    printf("Queue elements are:\t");
 
     if( front_position <= rear_position ) {
         while( front_position <= rear_position ) {
-            printf( "%d", deque_arr[front_position] );
+            printf( "%d \t", deque_arr[front_position] );
             front_position++;
         }
+        return;
     } else {
         while( front_position <= MAX - 1 ) {
             printf( "%d", deque_arr[front_position] );
