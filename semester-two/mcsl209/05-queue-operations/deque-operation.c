@@ -1,5 +1,6 @@
 #include <stdio.h>
-# define MAX 5;
+# define MAX 5
+
 int deque_arr[MAX];
 int left = -1;
 int right = -1;
@@ -8,7 +9,7 @@ void insert_right() {
     int item;
 
     // If queue is full. 
-    if( ( left == 0 && right = MAX -1 ) || ( left == right + 1 ) ) {
+    if( ( left == 0 && right == MAX -1 ) || ( left == right + 1 ) ) {
         printf( "Queue overflow" );
         return;
     }
@@ -28,6 +29,11 @@ void insert_right() {
 	deque_arr[right] = item;
 
 }
+
+void insert_left();
+void delete_right();
+void delete_left();
+void display_queue();
 
 void display_queue() {
     int front_position = left, rear_position = right;
@@ -92,7 +98,6 @@ void main() {
                 break;
             default:
                 printf("Incorrect choice entered");            
-
-        } while( choice != 5 );
-    }
+        }
+    } while( choice != 5 );
 }
