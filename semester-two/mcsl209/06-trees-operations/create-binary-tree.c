@@ -11,11 +11,11 @@ struct Node {
     int data;
     struct Node* left;
     struct Node* right;
-}
+};
 
 // Create a new Node
-Node* createNode(int data) {
-  struct node* newNode = malloc( sizeof( struct Node ) );
+struct Node* createNode(int data) {
+  struct Node* newNode = (struct Node*)malloc( sizeof( struct Node ) );
   newNode->data = data;
   newNode->left = NULL;
   newNode->right = NULL;
@@ -23,18 +23,18 @@ Node* createNode(int data) {
   return newNode;
 }
 
-struct insert( Node* rootNode, int data ) {
+struct Node* insert( struct Node* rootNode, int data ) {
 
     // If tree is empty.
     if ( rootNode == NULL ) {
-        rootNode = insert( data );
+        rootNode = createNode( data );
     }
 
     /**
      * If the data to be inserted is less than equal to data in rootNode,
      * then make a recursive call to insert data in the left subtree.
     **/
-    if ( data <= rootNode->data ) {
+    else if ( data <= rootNode->data ) {
         rootNode->left = insert( rootNode->left, data );
     }
 
@@ -42,7 +42,7 @@ struct insert( Node* rootNode, int data ) {
      * If the data to be inserted is greater than data in rootNode,
      * then make a recursive call to insert data in the right subtree.
     **/
-    if ( data > rootNode->data ) {
+    else if ( data > rootNode->data ) {
         rootNode->right = insert( rootNode->right, data );
     }
     
@@ -50,11 +50,11 @@ struct insert( Node* rootNode, int data ) {
 };
 
 // displaying the nodes!
-void print(struct Node* rootNode ) {
+void displayTree(struct Node* rootNode ) {
     if (rootNode != NULL) {
-        print(rootNode->left);
+        displayTree(rootNode->left);
         printf("%d \n", rootNode->data);
-        print(rootNode->right);
+        displayTree(rootNode->right);
     }
 }
 
@@ -67,6 +67,8 @@ int main() {
     root = insert( root, 3 );
     root = insert( root, 4 );
     root = insert( root, 5 );
-
+    
+    
+    displayTree(root);
     return 0;
 }
