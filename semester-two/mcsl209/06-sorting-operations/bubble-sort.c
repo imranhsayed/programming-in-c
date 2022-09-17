@@ -3,12 +3,12 @@
 int main() {
 
     int arr[6] = {100, 50, 60, 70, 150, 80 };
-    int lengthOfArray = 6, i, j, temp;
+    int lastElementIndex = 5, i, j, temp;
 
-    // Loop through the array.
-    for ( i = 1; i < lengthOfArray; i++){
+    // Loop through until the last element.
+    for ( i = 0; i <= lastElementIndex; i++){
         // Loop through to compare the array.
-        for( j = lengthOfArray - 1; j >= i; j-- ) {
+        for( j = lastElementIndex; j > i; j-- ) {
             // Compare the adjacent elements.
             if (arr[j] < arr[j-1]){
                 // Swap the element if not in order.
@@ -21,7 +21,7 @@ int main() {
     }
 
     // Print the sorted array;
-    for( i = 0; i < lengthOfArray; i++ ) {
+    for( i = 0; i <= lastElementIndex; i++ ) {
         printf( "%d \t", arr[i] );
     }
     
