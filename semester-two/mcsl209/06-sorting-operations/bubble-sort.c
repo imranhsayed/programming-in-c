@@ -10,7 +10,7 @@ int main() {
         // Loop through to compare the array.
         for( j = lengthOfArray - 1; j >= i; j-- ) {
             // Compare the adjacent elements.
-            if (arr[j] <= arr[j-1]){
+            if (arr[j] < arr[j-1]){
                 // Swap the element if not in order.
                 temp = arr[j];
                 arr[j] = arr[j-1];
