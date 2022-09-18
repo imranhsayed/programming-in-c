@@ -1,5 +1,9 @@
-// Linked List : To create and display Singly Linked List/
-// https://www.w3resource.com/c-programming-exercises/linked_list/c-linked_list-exercise-1.php
+/**
+ * Linked List : To create and display Singly Linked List
+ * https://www.programiz.com/dsa/linked-list
+ * https://www.geeksforgeeks.org/menu-driven-program-for-all-operations-on-singly-linked-list-in-c/
+ * https://www.w3resource.com/c-programming-exercises/linked_list/c-linked_list-exercise-1.php
+**/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -10,11 +14,11 @@
 **/
 struct Node {
     int data; // Data for the node.
-    struct Node *nextPtr; // Stores address of the next note.
+    struct Node *nextPtr; // Stores address of the next node.
 };
 
 // Create a 'firstNode' of Node data type.
-struct Node *firstNode;
+struct Node *firstNode = NULL;
 
 // Function to create the list
 void createNodeList( int noOfNodes );
@@ -48,56 +52,72 @@ int main() {
     return 0;
 }
 
+/**
+ * Create a Node.
+**/
+struct Node* createANode( int data, struct Node* nextPtr ) {
+    struct Node* node = ( struct Node* )malloc( sizeof( struct Node ) );
+
+    if ( node == NULL ) {
+        printf("Memory can not be allocated.");
+        exit;
+    }
+    
+    node->data = data;
+    node->nextPtr = nextPtr;
+
+    return node;
+}
+
 // Function to create the list.
 void createNodeList( int noOfNodes ) {
-    struct Node *newNode, *temp;
-
-    // This will store the data for each node during each iteration of linked list.
+    struct Node *newNode;
+    struct Node *temp;
     int data;
+
+    if ( firstNode != NULL) {
+        printf("\nThe list is already created\n");
+        return;
+    }
     
-    // Allocating dynamic memory to firstNode.
-    firstNode = ( struct Node * )malloc( sizeof( struct Node ) );
+    // If no. of nodes to be created is zero, no need to create list.
+    if ( noOfNodes == 0 ) {
+        return;
+    }
+
+    /**
+     * Step 1: Create First Node.
+     * 
+     * Take the data for the first node.
+    **/
+    printf(" Input data for node 1 : ");
+    scanf("%d", &data);
+
+    firstNode = createANode( data, NULL );
+
+    /* 
+     * Step 2: Set temp to first node.
+     * Initially temp will contain first node and then
+     * later in below loop it will contain previous node.
+    **/
+    temp = firstNode;
     
-    // If firstNode is NULL, memory was not allocated.
-    if( firstNode == NULL ) {
-        printf(" Memory can not be allocated.");
-    } else {
-        // Take the data for the node.
-        printf(" Input data for node 1 : ");
-        scanf("%d", &data);
+    /*
+     * Step 3: Creating rest of the nodes and adding to linked list.
+    **/
+    for( int i = 2; i <= noOfNodes; i++ ) {
+
+        printf(" Input data for node %d : ", i);
+        scanf(" %d", &data);
+
+        // Create a new node with given data and next pointer as NULL
+        newNode = createANode( data, NULL );
         
-        firstNode->data = data;      
-        firstNode->nextPtr = NULL; // links the address field to NULL
-
-        // Initial temp will contain first node and then later in below loop it will 
-        // contain previous node.
-        temp = firstNode;
+        // Then set previous node's next pointer (tmp) to the newNode
+        temp->nextPtr = newNode; 
+        // Then point previous node(temp) to the next node.
+        temp = newNode;
         
-        // Creating noOfNodes nodes and adding to linked list
-        for( int i=2; i<=noOfNodes; i++) {
-
-            // Allocate dynamic memory to new new node.
-            newNode = (struct Node *)malloc(sizeof(struct Node));
-
-            // Ensure some memory is allocated.
-            if(newNode == NULL) {
-                printf(" Memory can not be allocated.");
-                break;
-            }
-            
-            printf(" Input data for node %d : ", i);
-            scanf(" %d", &data);
-            
-            // Add the data to the node.
-            newNode->data = data;
-            // Set the next Pointer to NULL first.
-            newNode->nextPtr = NULL;
-            // Then set previous node's next pointer (tmp) to the newNode
-            temp->nextPtr = newNode; 
-            // Then point previous node(temp) to the next node.
-            temp = newNode;
-            
-        }
     }
 }
 
@@ -105,7 +125,7 @@ void createNodeList( int noOfNodes ) {
 void displayList() {
     struct Node *temp;
     
-    if (firstNode == NULL) {
+    if ( firstNode == NULL ) {
         printf(" List is empty.");
         return;
     }
@@ -114,7 +134,7 @@ void displayList() {
     temp = firstNode;
 
     // Loop through till the end of the single linked list( i.e untill the node(temp) is not null )
-    while (temp != NULL) {
+    while ( temp != NULL ) {
         printf( "Data = %d\n", temp->data );
 
         // Set the temp to point to the next node.
@@ -126,7 +146,7 @@ void deleteANodeFromTheList( int dataToDelete ) {
     struct Node *previousNode;
     struct Node *temp;
 
-    if (firstNode == NULL) {
+    if ( firstNode == NULL ) {
         printf(" List is empty.");
         return;
     }
@@ -135,7 +155,7 @@ void deleteANodeFromTheList( int dataToDelete ) {
     temp = firstNode;
 
     // Loop through till the end of the single linked list( i.e untill the node(temp) is not null )
-    for (int i = 0; temp != NULL; i++ ) {
+    for ( int i = 0; temp != NULL; i++ ) {
 
         /**
          * Node exists at the begining
