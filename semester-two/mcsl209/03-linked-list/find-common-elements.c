@@ -7,7 +7,8 @@ struct Node {
 };
 
 struct Node *firstNodeA = NULL;
-struct Node *firstNodeB = NULL; 
+struct Node *firstNodeB = NULL;
+struct Node *firstNodeC = NULL;
 
 /**
  * Create a new node.
@@ -93,6 +94,42 @@ void displayList( struct Node *firstNode ) {
     
 }
 
+struct Node* createListWithCommonNodes( struct Node* firstNodeListA, struct Node* firstNodeListB, struct Node* firstNodeListC ) {
+
+     // If either of the nodes are empty then return.
+    if ( firstNodeListA == NULL || firstNodeListB == NULL ) {
+        return firstNodeListC;
+    }
+
+    struct Node *tempA = firstNodeA, *tempB = firstNodeB, *tempC, *newNodeC;
+
+    while( tempA != NULL ) {
+        while( tempB != NULL ) {
+
+            // If the data for current node in the iteration is not equal for both lists, then continue.
+            if( tempA->data != tempB->data ) {
+                continue;
+            }
+
+            if( firstNodeListC == NULL ) {
+                firstNodeListC = createANode( tempA->data, NULL );
+                tempC = firstNodeListC;
+            } else {
+                newNodeC = createANode( tempA->data, NULL );
+                tempC->nextPtr = newNodeC;
+                tempC = newNodeC;
+            }
+
+            tempB = tempB->nextPtr;
+
+        }
+
+        tempA = tempA->nextPtr;
+    }
+
+    return firstNodeListC;
+}
+
 int main() {
     int sizeA, sizeB;
 
@@ -103,9 +140,11 @@ int main() {
     scanf( "%d", &sizeA );
 
    firstNodeA = createLinkedList( sizeA, firstNodeA );
-//    firstNodeB = createLinkedList( sizeB, firstNodeB );
-    displayList( firstNodeA );
-    // displayList( firstNodeB );
+   firstNodeB = createLinkedList( sizeB, firstNodeB );
+   displayList( firstNodeA );
+   displayList( firstNodeB );
+   firstNodeC = createListWithCommonNodes( firstNodeA, firstNodeB, firstNodeC );
+   displayList( firstNodeC );
 
-    return 0;
+   return 0;
 }
