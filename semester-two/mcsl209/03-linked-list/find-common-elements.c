@@ -64,8 +64,10 @@ struct Node* createLinkedList( int size, struct Node *firstNode ) {
 
         newNode = createANode( data, NULL );
         temp->nextPtr = newNode;
-        // temp is assigned the address of newNode
-        // NOT same as temp->data = newNode->data; temp->nextPtr = newNode->nextPtr;
+        /*
+         * Temp is assigned the address of newNode.
+         * NOT same as temp->data = newNode->data; temp->nextPtr = newNode->nextPtr;
+        **/
         temp = newNode;
    }
 
