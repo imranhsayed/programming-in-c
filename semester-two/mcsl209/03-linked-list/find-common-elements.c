@@ -33,6 +33,9 @@ struct Node* createANode( int data, struct Node* nextPtr ) {
     
 }
 
+/**
+ * Create a linked list.
+**/
 struct Node* createLinkedList( int size, struct Node *firstNode ) {
     struct Node *newNode, *temp;
     int data;
@@ -98,6 +101,14 @@ void displayList( struct Node *firstNode ) {
     
 }
 
+/**
+ * Create new linked list containing common nodes.
+ * 
+ * @param struct Node* firstNodeListA First node of list A.
+ * @param struct Node* firstNodeListB First node of list B.
+ * 
+ * @return struct Node* First node of list containing common nodes.
+**/
 struct Node* createListWithCommonNodes( struct Node* firstNodeListA, struct Node* firstNodeListB ) {
 
     struct Node *tempA = firstNodeListA, *tempB = firstNodeListB, *tempC, *newNodeC, *firstNodeListC = NULL;
@@ -107,10 +118,14 @@ struct Node* createListWithCommonNodes( struct Node* firstNodeListA, struct Node
         return firstNodeListC;
     }
 
+    // Iterate through linked list A
     while( tempA != NULL ) {
+        // Iterate through linked list B
         while( tempB != NULL ) {
-
-            // If the data for current node in the iteration is not equal for both lists, then continue.
+            /* 
+             * If the data for current node in the iteration is equal for both lists, 
+             * then create a new node containing that data and add it to the new list.
+            **/
             if( tempA->data == tempB->data ) {
 
                 if( firstNodeListC == NULL ) {
@@ -129,6 +144,7 @@ struct Node* createListWithCommonNodes( struct Node* firstNodeListA, struct Node
         }
         
         tempA = tempA->nextPtr;
+
         // Reset tempB to point to first node of list B.
         tempB = firstNodeB;
     }
