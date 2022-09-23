@@ -7,16 +7,60 @@ struct Node {
 };
 
 struct Node* firstNode = NULL;
+struct Node* sortedFirstNode = NULL;
+
+struct Node* insertNodeInSortedList( struct Node* sortedFirstNode, struct Node* newNode ) {
+    struct Node *current;
+
+    if ( sortedFirstNode == NULL || sortedFirstNode->data > newNode->data ) {
+        newNode->nextPtr = sortedFirstNode;
+        sortedFirstNode = newNode;
+    } else {
+        // Locate the position where this node can be inserted.
+        current = sortedFirstNode;
+
+        while( current != NULL && current->nextPtr->data <= newNode->data ) {
+            current = current->nextPtr;
+            newNode->nextPtr = current->nextPtr;
+            current->nextPtr = newNode;
+        }
+    }
+    
+    return sortedFirstNode;
+}
 
 /**
  *  Sorts a linked list in ascending order.
-*/
-struct Node* sortList( struct Node* firstNode ) {
-    if ( firstNode == NULL ) {
-        printf( "List is empty" );
-        exit(0);
+ * 
+ * “Sorted” -will point to the minimum element of the sorted set (a linked list in our case)
+ * “Current” - will point to the first element to be processed in the unsorted set (Initially, current will be equal to the head of the input linked list)
+ * 
+ * A fixed sorted subset (the linked list starting with “sorted”)
+ * The current item (the node pointed by “current”)
+ * A subset containing remaining items (the linked list starting from the next node of “current”)
+**/
+struct Node* sortList( struct Node* firstNode, int size ) {
+
+    /**
+     * Initialize the sortedList first node, which will tracke the sorted items.
+    **/
+    struct Node *sortedListFirstNode = NULL;
+
+    // Set the current node to the firstNode(of the unsorted list).
+    struct Node *current = firstNode;
+
+    // Loop through the unsorted list.
+    while( current != NULL ) {
+
+        // Insert Current Node in the sorted linked list.
+        sortedListFirstNode = insertNodeInSortedList( sortedListFirstNode, current );
+
+        // Move the current to point to the next node.
+        current = current->nextPtr;
     }
-    
+
+    return sortedListFirstNode;
+
 }
 
 /**
@@ -89,6 +133,8 @@ void displayList( struct Node* firstNode ) {
         printf( "List is empty" );
         exit(0);
     }
+
+    printf( "\nDisplaying the list: " );
     
     temp = firstNode;
 
@@ -105,6 +151,11 @@ int main() {
     scanf( "%d", &size );
     firstNode = createAList( size, firstNode );
     displayList( firstNode );
+
+
+    // @TODO Remove size later.
+    sortedFirstNode = sortList( firstNode, size );
+    displayList( sortedFirstNode );
 
     return 0;
 }
