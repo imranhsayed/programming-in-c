@@ -19,11 +19,11 @@ struct Node* insertNodeInSortedList( struct Node* sortedFirstNode, struct Node* 
         // Locate the position where this node can be inserted.
         current = sortedFirstNode;
 
-        while( current != NULL && current->nextPtr->data <= newNode->data ) {
+        while( current->nextPtr != NULL && current->nextPtr->data <= newNode->data ) {
             current = current->nextPtr;
-            newNode->nextPtr = current->nextPtr;
-            current->nextPtr = newNode;
         }
+        newNode->nextPtr = current->nextPtr;
+        current->nextPtr = newNode;
     }
     
     return sortedFirstNode;
