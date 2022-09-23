@@ -49,14 +49,20 @@ struct Node* sortList( struct Node* firstNode, int size ) {
     // Set the current node to the firstNode(of the unsorted list).
     struct Node *current = firstNode;
 
+
+    struct Node *next = NULL;
+
     // Loop through the unsorted list.
     while( current != NULL ) {
 
+        // Store the next node of curr for next iteration.
+        next = current->nextPtr;
+        
         // Insert Current Node in the sorted linked list.
         sortedListFirstNode = insertNodeInSortedList( sortedListFirstNode, current );
 
         // Move the current to point to the next node.
-        current = current->nextPtr;
+        current = next;
     }
 
     return sortedListFirstNode;
