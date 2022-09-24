@@ -33,6 +33,9 @@ struct Node* createANode( int data, struct Node* nextPtr ) {
     
 }
 
+/**
+ * Create a linked list.
+**/
 struct Node* createLinkedList( int size, struct Node *firstNode ) {
     struct Node *newNode, *temp;
     int data;
@@ -64,6 +67,10 @@ struct Node* createLinkedList( int size, struct Node *firstNode ) {
 
         newNode = createANode( data, NULL );
         temp->nextPtr = newNode;
+        /*
+         * Temp is assigned the address of newNode.
+         * NOT same as temp->data = newNode->data; temp->nextPtr = newNode->nextPtr;
+        **/
         temp = newNode;
    }
 
@@ -94,37 +101,52 @@ void displayList( struct Node *firstNode ) {
     
 }
 
-struct Node* createListWithCommonNodes( struct Node* firstNodeListA, struct Node* firstNodeListB, struct Node* firstNodeListC ) {
+/**
+ * Create new linked list containing common nodes.
+ * 
+ * @param struct Node* firstNodeListA First node of list A.
+ * @param struct Node* firstNodeListB First node of list B.
+ * 
+ * @return struct Node* First node of list containing common nodes.
+**/
+struct Node* createListWithCommonNodes( struct Node* firstNodeListA, struct Node* firstNodeListB ) {
+
+    struct Node *tempA = firstNodeListA, *tempB = firstNodeListB, *tempC, *newNodeC, *firstNodeListC = NULL;
 
      // If either of the nodes are empty then return.
     if ( firstNodeListA == NULL || firstNodeListB == NULL ) {
         return firstNodeListC;
     }
 
-    struct Node *tempA = firstNodeA, *tempB = firstNodeB, *tempC, *newNodeC;
-
+    // Iterate through linked list A
     while( tempA != NULL ) {
+        // Iterate through linked list B
         while( tempB != NULL ) {
+            /* 
+             * If the data for current node in the iteration is equal for both lists, 
+             * then create a new node containing that data and add it to the new list.
+            **/
+            if( tempA->data == tempB->data ) {
 
-            // If the data for current node in the iteration is not equal for both lists, then continue.
-            if( tempA->data != tempB->data ) {
-                continue;
-            }
+                if( firstNodeListC == NULL ) {
+                    firstNodeListC = createANode( tempA->data, NULL );
+                    tempC = firstNodeListC;
+                } else {
+                    newNodeC = createANode( tempA->data, NULL );
+                    tempC->nextPtr = newNodeC;
+                    tempC = newNodeC;
+                }
 
-            if( firstNodeListC == NULL ) {
-                firstNodeListC = createANode( tempA->data, NULL );
-                tempC = firstNodeListC;
-            } else {
-                newNodeC = createANode( tempA->data, NULL );
-                tempC->nextPtr = newNodeC;
-                tempC = newNodeC;
             }
 
             tempB = tempB->nextPtr;
 
         }
-
+        
         tempA = tempA->nextPtr;
+
+        // Reset tempB to point to first node of list B.
+        tempB = firstNodeB;
     }
 
     return firstNodeListC;
@@ -135,16 +157,21 @@ int main() {
 
     printf( "Enter the no. of items in Linked List A: " );
     scanf( "%d", &sizeA );
+    firstNodeA = createLinkedList( sizeA, firstNodeA );
 
     printf( "Enter the no. of items in Linked List B: " );
-    scanf( "%d", &sizeA );
+    scanf( "%d", &sizeB );
+    firstNodeB = createLinkedList( sizeB, firstNodeB );
 
-   firstNodeA = createLinkedList( sizeA, firstNodeA );
-   firstNodeB = createLinkedList( sizeB, firstNodeB );
-   displayList( firstNodeA );
-   displayList( firstNodeB );
-   firstNodeC = createListWithCommonNodes( firstNodeA, firstNodeB, firstNodeC );
-   displayList( firstNodeC );
+    printf("List A: \n");
+    displayList( firstNodeA );
+
+    printf("List B: \n");
+    displayList( firstNodeB );
+
+    firstNodeC = createListWithCommonNodes( firstNodeA, firstNodeB );
+    printf("Common Elements: \n");
+    displayList( firstNodeC );
 
    return 0;
 }
